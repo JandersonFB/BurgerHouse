@@ -4,6 +4,7 @@
     "description": "",
     "main": "src/server.js",
     "scripts": {
+        "server": "pm2 start src/server.js",
         "lista": "pm2 list",
         "monit": "pm2 monit",
         "restart": "pm2 restart src/server.js",
