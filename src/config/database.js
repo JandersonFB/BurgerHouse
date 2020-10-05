@@ -1,9 +1,9 @@
 module.exports = {
     dialect: 'mysql',
-    host: '127.0.0.1',
+    host: 'bootwhatsapp.cwdkivtj8ka1.sa-east-1.rds.amazonaws.com',
     username: 'dev',
-    password: 'secret',
-    database: 'bootwhatsapp',
+    password: 'secret(!#)123TECH',
+    database: 'BurgerHouse',
 
 }
   /*  
