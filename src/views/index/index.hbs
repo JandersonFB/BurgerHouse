@@ -1,0 +1,320 @@
+{{>_popup}}
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Painel De Controle</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="page-header float-right">
+            <div class="page-title">
+                <ol class="breadcrumb text-right">
+                    <p>Desligar / Ligar &nbsp;&nbsp;</p>
+                    <label class="switch">
+                        <input type="checkbox" id="checkbox" data-toggle="modal" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content mt-3">
+    {{>_msg}}
+    <div class="col-sm-12">
+        <div class="alert  alert-success alert-dismissible fade show" role="alert">
+            <span class="badge badge-pill badge-success">Bom Serviço! </span> Não se esqueça de abrir sua loja.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="container col-12">
+        <div class="col-sm-6 col-lg-2 ">
+            <div class="card text-white bg-flat-color-5">
+                <div class="card-body pb-0 text-center">
+                    <h4 class="mb-0">
+                        <span class="count" id="somaPedido">{{countRequests}}</span>
+                    </h4>
+                    <p class="text-light">Pedidos</p>
+                    <div class="chart-wrapper px-0" style="height:20px;" height="20">
+                        <canvas id="widgetChart1"></canvas>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!--/.col-->
+
+        <div class="col-sm-6 col-lg-2">
+            <div class="card text-white bg-flat-color-1">
+                <div class="card-body pb-0 text-center">
+                    <h4 class="mb-0">
+                        <span class="count" id="countPreparoI">{{countPreparo}}</span>
+                    </h4>
+                    <p class="text-light">Preparo</p>
+
+                    <div class="chart-wrapper px-0" style="height:20px;" height="20">
+                        <canvas id="widgetChart2"></canvas>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+
+        <div class="col-sm-6 col-lg-2">
+            <div class="card text-white bg-flat-color-3">
+                <div class="card-body pb-0 text-center">
+                    <h4 class="mb-0">
+                        <span class="count">{{countEntregue}}</span>
+                    </h4>
+                    <p class="text-light">Entregues</p>
+
+                </div>
+
+                <div class="chart-wrapper px-0" style="height:20px;" height="20">
+                    <canvas id="widgetChart3"></canvas>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+
+        <div class="col-sm-6 col-lg-2 ">
+            <div class="card text-white bg-flat-color-4">
+                <div class="card-body pb-0 text-center">
+                    <h4 class="mb-0">
+                        <span class="count">{{countCancelado}}</span>
+                    </h4>
+                    <p class="text-light">Cancelados</p>
+
+                    <div class="chart-wrapper px-3" style="height:20px;" height="20">
+                        <canvas id="widgetChart4"></canvas>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-4 ">
+            <div class="card text-white bg-flat-color-2">
+                <div class="card-body pb-0 text-center">
+                    <h4 class="mb-0">
+                        <span class="count" id="imprimir">Anotações</span>
+                    </h4>
+                    <p class="text-light">Digite sua anotações</p>
+
+                    <div class="chart-wrapper px-3" style="height:20px;" height="20">
+                        <canvas id="widgetChart4"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+
+    <div class="col-xl-9">
+        <div class="card">
+            <div class="card-body">
+
+                    {{!-- fazer o carregamento de cada pedido começando por aqui --}}
+                    {{#if requests}}
+                    {{#each requests}}
+
+                <div id="pedidos" class="row" style="min-height: 500px;">
+                    <div class="col-sm-4">
+                        <h4 class="card-title mb-0">Pedidos</h4>
+                        <div class="small text-muted">{{meseAno}}</div>
+
+                    </div>
+                    <!--/.col-->
+                    <hr>
+                    <div class="col-sm-8 hidden-sm-down">
+
+                        <button type="button" class="btn btn-primary float-right bg-flat-color-1 ml-3"><i
+                               title="Imprimir" class="fa fa-print" onclick="imprimir(this)"></i></button>
+
+                        <button type="button" onclick="mandaMensagem('{{this.telephone}}','Cancelado','{{this.orderRequest}}')"
+                            title="Cancelar Pedido" class="btn btn-danger float-right"><i
+                                class="fa fa-window-close"></i></button>
+                        <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-1 col-12">
+                        {{#if (preparando this.status)}}
+                        <p class="ml-3">Preparando <input type="radio" checked>
+                            {{else}}
+                        <p class="ml-3">Preparando <input type="radio"
+                                onchange="mandaMensagem('{{this.telephone}}','Preparando','{{this.orderRequest}}')">
+                            {{/if}}
+                            &nbsp;&nbsp;
+                            {{#if (saiuParaEntrega this.status)}}
+                            Saiu para Entrega <input type="radio" checked>
+                            {{else}}
+                            Saiu para Entrega <input type="radio"
+                                onchange="mandaMensagem('{{this.telephone}}','Saiu para Entrega','{{this.orderRequest}}')">
+                            {{/if}}
+                            &nbsp;&nbsp;
+                            {{#if (entregue this.status)}}
+                            Entregue <input type="radio" checked></p>
+                        {{else}}
+                        Entregue <input type="radio" onchange="mandaMensagem('{{this.telephone}}','Entregue','{{this.orderRequest}}')">
+                        </p>
+                        {{/if}}
+                        <hr>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <div class="form-group col-4">
+                            <h6 class=""><strong>Pedido: </strong> #{{this.orderRequest}}</h6>
+                        </div>
+
+                        <div class="form-group col-8" >
+                            <h6 class=""><strong>Nome: </strong> {{this.nome}}
+                                &nbsp;&nbsp;&nbsp;<strong>Telefone:
+                                </strong> {{trataTelephone this.telephone}}</h6>
+                        </div>
+
+                        <div class="form-group ml-3">
+                            <h6 class="mt-1"><strong>Total: {{dinheiro this.total}}</strong></i></h6>
+                            {{#if this.formPayment}}
+                            <h6 class="mt-1"><strong>Foma de Pagamento: </strong>{{dinheiro this.formPayment}}
+                            </h6>
+                            {{/if}}
+                            <h6 class="mt-1"><strong>Tipo de Entrega: </strong>{{this.deliveryType}}</h6>
+                            {{#if this.address}}
+                            <h6 class="mt-1"><strong>Endereço: </strong>{{this.address}}</h6>
+                            {{/if}}
+                            <h6 class="mt-1"><strong>Hora do Pedido: <i class="fa  fa-tachometer"></i></strong>
+                                {{trataHora this.createdAt}}</i></h6>
+                            <h6 class="mt-1"><strong>Saiu para Entrega: <i class="fa  fa-rocket"></i></strong>
+                                22:00Hr</i></h6>
+                            <h6 class="mt-1"><strong>Entregue: <i class="fa  fa-check"></i></strong> 22:30Hr</i>
+                            </h6>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group col-12">
+                        <h5 class="text-center">Dados do Pedido</h5>
+                        <table style="width:100%" border="1px black solid" class="mt-1">
+                            <tr>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Nome</th>
+                                <th class="text-center">Observação</th>
+                                <th class="text-center">Quantidade</th>
+                                <th class="text-center">Subtotal</th>
+                            </tr>
+                            {{#each pedidos}}
+                            <tr>
+                                <td class="text-center">{{maiuscula this.class}}</td>
+                                <td class="text-center">{{this.nome}}</td>
+                                <td class="text-center">{{maiuscula this.note}}</td>
+                                <td class="text-center">{{this.quantity}}x</td>
+                                <td class="text-center">{{multiplica this.value this.quantity}}</td>
+                            </tr>
+                            {{/each}}
+
+                        </table>
+                        <hr class="mt-5">
+                    </div>
+                    </div>
+                    {{/each}}
+
+                    {{else}}
+                    <h3 style="text-align: center;">Pedidos</h3>
+                    <hr style="height: 10px;">
+                    {{/if}}
+
+                    {{!-- Fim do each  --}}
+
+
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-6" style="min-heigth: 300px;">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-one">
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <div class="stat-icon dib"><i class="ti-desktop text-dark border-dark"></i></div>
+                        </div>
+                        <div class="form-group col-8">
+                            {{#each admin}}
+                            <div class="stat-text">{{name}}</div>
+                            <br>
+                        </div>
+                        <div class="stat-content dib">
+                            <div class="text-center">
+                                E-mail: {{email}}
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-one">
+                    <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+                    <div class="stat-content dib">
+                        <div class="stat-text">Em Atendimento</div>
+                        <div class="stat-digit" id="EmAtendimento">{{emAtendimento}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-one">
+                    <div class="stat-icon dib"><i class="ti-layout-grid2 text-warning border-warning"></i></div>
+                    <div class="stat-content dib">
+                        <div class="stat-text">Gasto materiais</div>
+                        {{#if spent}}
+                        <div class="stat-digit" id="gastoMaterial">{{dinheiro spent}}</div>
+                        {{else}}
+                        <div class="stat-digit" id="gastoMaterial">0</div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#right-panel -->
+    <div class="col-xl-3 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-one">
+                    <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
+                    <div class="stat-content dib">
+                        <div class="stat-text">Total Lucro</div>
+                        {{#if profit}}
+                        <div class="stat-digit" id="totalLucro">{{dinheiro profit}}</div>
+                        {{else}}
+                        <div class="stat-digit" id="totalLucro">0</div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Right Panel -->
+</div> <!-- .content -->
+
+ <script src="/scripts/socket.js"></script>

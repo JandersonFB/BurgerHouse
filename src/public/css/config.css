@@ -1,0 +1,23 @@
+#configClass {
+    top: -1000px;
+    position: relative;
+    transition: 600ms;
+}
+
+#config {
+    top: -150px;
+    position: relative;
+    transition: 600ms;
+}
+
+#cashierTypeDelivery ul li {
+    display: inline;
+}
+
+
+/* .card-body,
+body,
+#fundo {
+    color: white;
+    background-color: rgb(46, 46, 46);
+} */

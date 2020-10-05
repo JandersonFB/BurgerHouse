@@ -1,0 +1,17 @@
+#CLIENTES i {
+    color: rgb(58, 58, 58);
+}
+
+#CLIENTES a,
+h5 {
+    color: rgb(119, 119, 119);
+}
+
+#rolePesquisa {
+    display: flex;
+    margin-left: 40%;
+}
+
+#EnviarImg {
+    border-radius: 5px;
+}

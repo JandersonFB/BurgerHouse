@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="h2">Vizualização de Cardápios Cadastrados</div>
+            <hr>
+            {{>_msg}}
+            <form action="/menu/views" method="post">
+                <div class="row col-12">
+                    <div class="form-group col-12">
+                        <label for="class">Selecione a classe de alimento que deseja visualizar</label>
+                        <select name="class" id="class" class="form-control">
+                            <option value="">Selecione</option>
+                            {{#each class}}
+                            <option value="{{class}}">{{maiuscula class}}</option>
+                            {{/each}}
+                        </select>
+                        <button class="btn btn-outline-success mt-2 col-12">Pesquisar</button>
+                        <hr class="mt-4">
+                    </div>
+                </div>
+            </form>
+            <div class="row col-12 mt-3">
+                {{#each data}}
+                <div class="btn-group col-3 mt-4" role="group" aria-label="Basic example">
+                    <form action="/menu/editar" method="post">
+                    <input type="hidden" name="id" id="id" value="{{id}}">
+                        <button type="submit" class="btn btn-secondary"
+                            style="height: 50px; border-radius:5px; width:110%">Editar</button>
+                    </form>
+                    <form action="/menu/apagar" method="post">
+                    <input type="hidden" name="id" id="id" value="{{id}}">
+                        <button type="submit" class="btn btn-secondary ml-2"
+                            style="height: 50px; border-radius:5px; width:100%">Apagar</button>
+                    </form>
+                </div>
+                <div class="form-group col-9">                    
+                    <h6><strong>Nome: </strong>{{name}}</h6>
+                    <h6><strong>Descrição: </strong>{{desc}}</h6>
+                    <h6><strong>Valor do Produto: </strong>{{dinheiro value}}</h6>
+                    <h6><strong>Gasto para Produzir: </strong>{{dinheiro costProduce}}</h6>
+                    <hr>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
