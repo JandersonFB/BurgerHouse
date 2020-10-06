@@ -18,3 +18,9 @@
 [1006/103544.842:ERROR:file_io_win.cc(162)] CreateFile C:\Users\Matheus\AppData\Local\Temp\puppeteer_dev_chrome_profile-7aSC3y\Crashpad\settings.dat: O sistema não pode encontrar o caminho especificado. (0x3)
 [1006/103544.842:ERROR:file_io_win.cc(171)] CreateFile C:\Users\Matheus\AppData\Local\Temp\puppeteer_dev_chrome_profile-7aSC3y\Crashpad\reports\53a8453b-2181-4b76-86b4-86550c1cb1a4.dmp: O sistema não pode encontrar o caminho especificado. (0x3)
 [1006/103544.842:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[1006/165340.612:ERROR:file_io_win.cc(162)] CreateFile C:\Users\Matheus\AppData\Local\Temp\puppeteer_dev_chrome_profile-RQBf26\Crashpad\settings.dat: O sistema não pode encontrar o caminho especificado. (0x3)
+[1006/165340.613:ERROR:file_io_win.cc(171)] CreateFile C:\Users\Matheus\AppData\Local\Temp\puppeteer_dev_chrome_profile-RQBf26\Crashpad\reports\1d0bb690-3c16-4379-b00e-d6aaf27bf878.dmp: O sistema não pode encontrar o caminho especificado. (0x3)
+[1006/165340.614:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[1006/165350.871:ERROR:file_io_win.cc(162)] CreateFile C:\Users\Matheus\AppData\Local\Temp\puppeteer_dev_chrome_profile-Om9zVR\Crashpad\settings.dat: O sistema não pode encontrar o caminho especificado. (0x3)
+[1006/165350.872:ERROR:file_io_win.cc(171)] CreateFile C:\Users\Matheus\AppData\Local\Temp\puppeteer_dev_chrome_profile-Om9zVR\Crashpad\reports\89f86480-51c6-44dd-b66a-2c182a5ec9a2.dmp: O sistema não pode encontrar o caminho especificado. (0x3)
+[1006/165350.872:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
