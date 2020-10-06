@@ -4,7 +4,6 @@ socket.on('PedidoConcluido', async function (data) {
     playSound()
   await renderPedido(data)
     somaPedidosDia()
-
 })
 
 socket.on('NovoClienteAtendimento',async function (data){
