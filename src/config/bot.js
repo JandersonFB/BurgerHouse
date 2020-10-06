@@ -1,17 +1,17 @@
 const fs = require('fs');
 const { create } = require('venom-bot');
 const path = require('path')
-//dependencies files.js 
+    //dependencies files.js 
 const banco = require('@data/user/user') //arquivo que contem o USER e o stagio que ele se encontra
 const escolha = require('@data/escolha')
 const stages = require('@controller/controller') //arquivo com a desc e o apontamento para os arquivo de messages seguindo por stagios
-//Models
+    //Models
 const User = require('@models/Users');
 //const public = require('@public/images')
 let venom_client;
 var status
 
-const sendText = async (telephone, msg) => {
+const sendText = async(telephone, msg) => {
     if (!venom_client) {
         return
         //console.log('client ainda não criado!');
@@ -20,7 +20,7 @@ const sendText = async (telephone, msg) => {
     return await venom_client.sendText(telephone, msg);
 }
 
-const stopClient = async () => {
+const stopClient = async() => {
     if (venom_client) {
         //  await venom_client.close()
         return await venom_client.close().then(() => console.log('Cliente Desativado'))
@@ -28,7 +28,7 @@ const stopClient = async () => {
     return console.log('client ainda não criado!');
 }
 
-const getStatus = async () => {
+const getStatus = async() => {
     if (venom_client) {
         //  await venom_client.close()
         return await status
@@ -41,21 +41,21 @@ const getStatus = async () => {
 async function client() {
     // if (venom_client) return venom_client;
     venom_client = await create('Delivery', (base64Qr, asciiQR) => {
-        // Mostra o Qr Code no Terminal
-        console.log(asciiQR);
+            // Mostra o Qr Code no Terminal
+            console.log(asciiQR);
 
-        // Cria o arquivo png
-        let dir = path.resolve(__dirname, '..', 'public', 'images', 'qrCode.png')
-        exportQR(base64Qr, dir);
-    },
+            // Cria o arquivo png
+            let dir = path.resolve(__dirname, '..', 'public', 'images', 'qrCode.png')
+            exportQR(base64Qr, dir);
+        },
         (statusSession) => {
             status = statusSession
             console.log('Status Session: ', statusSession); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail
         }, {
-        logQR: true, // Logs QR automatically in terminal
-        browserArgs: ['--no-sandbox'], // Parameters to be added into the chrome browser instance
-        autoClose: false,
-    });
+            logQR: true, // Logs QR automatically in terminal
+            browserArgs: ['--no-sandbox'], // Parameters to be added into the chrome browser instance
+            autoClose: false,
+        });
 
     function exportQR(qrCode, path) {
         qrCode = qrCode.replace('data:image/png;base64,', '');
@@ -77,7 +77,7 @@ async function start(client) {
         }
     });
 
-    client.onMessage(async (message) => {
+    client.onMessage(async(message) => {
         const user = await User.findAll({ where: { telephone: message.sender.id } })
         console.log(user.length)
         if (user.length === 0) {
@@ -128,7 +128,7 @@ function getStage(user) {
         return banco.db[user].stage;
     } else {
         //Se for a primeira vez que entra e contato
-        banco.db[user]={stage: 0}
+        banco.db[user] = { stage: 0 }
         escolha.db[user] = {
             escolha: [],
             itens: [],
