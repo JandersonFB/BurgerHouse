@@ -51,6 +51,8 @@ async function submit(user,order) {
             })
         }
     })
+    
+   setTimeout(()=>{escolha.db[user] = {}},5000)
 
 }
 

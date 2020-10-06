@@ -122,7 +122,7 @@ async function start(client) {
 
 
 function getStage(user) {
-    if (escolha.db[user] || banco.db[user].stage == 0) {
+    if (escolha.db[user]) {
         //console.log(escolha.db[user])
         //Se existir esse numero no banco de dados
         return banco.db[user].stage;
