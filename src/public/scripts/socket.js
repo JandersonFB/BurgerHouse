@@ -1,9 +1,9 @@
 var socket = io()
 
 socket.on('PedidoConcluido', async function (data) {
+    playSound()
   await renderPedido(data)
     somaPedidosDia()
-    playSound()
 
 })
 
@@ -97,9 +97,6 @@ async function renderPedido(dados) {
     <h6 class="mt-1"><strong>Endereço: </strong> ${dados.Address ? dados.Address : ''}</h6>
     <h6 class="mt-1"><strong>Hora do Pedido: <i class="fa  fa-tachometer"></i></strong>
         ${dados.OrderTime.split(':')[0]}:${dados.OrderTime.split(':')[1]}Hr</i></h6>
-    <h6 class="mt-1"><strong>Saiu para Entrega: <i class="fa  fa-rocket"></i></strong>
-        22:00Hr</i></h6>
-    <h6 class="mt-1"><strong>Entregue: <i class="fa  fa-check"></i></strong> 22:30Hr</i></h6>
 </div>
 
 </div>

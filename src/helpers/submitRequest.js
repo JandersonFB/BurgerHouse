@@ -51,6 +51,7 @@ async function submit(user, order) {
         }
     })
 
+   setTimeout(()=>{escolha.db[user]= undefined},5000)
 }
 
 exports.submit = submit

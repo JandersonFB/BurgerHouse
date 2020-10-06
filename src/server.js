@@ -89,8 +89,9 @@ app.engine('hbs', hbs({
             return value == 'Entregue'
         },
         trataHora: function(value) {
+            const formataHora = (Hora) => Hora < 10 ? '0' + Hora : Hora
             let data = new Date(value)
-            return `${data.getHours()}:${data.getMinutes()}`
+            return `${formataHora(data.getHours())}:${formataHora(data.getMinutes())}`
         },
         valorTrue: function(value) {
             return value == 'true'

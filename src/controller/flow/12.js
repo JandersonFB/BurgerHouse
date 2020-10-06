@@ -8,8 +8,6 @@ const getMenu = require('@helpers/getMenu')
 const NovoClienteAtendimento = require('../../server');
 const setStage = require('../../helpers/setStage')
 
-
-
 async function execute(user, msg, contato) {
     let valorTotal = 0
     let order = Math.random().toString(32).substr(2, 9)
@@ -24,6 +22,7 @@ async function execute(user, msg, contato) {
     if (msg.toUpperCase() == 'OK') {
         banco.db[user].stage = 0
         setStage.envStageDb(user, 0)
+        
         NovoClienteAtendimento.NovoClienteAtendimento({soma: -1})
         await enviaParaFrontend.enviaParaFrontend({
             name: contato,
@@ -41,7 +40,7 @@ async function execute(user, msg, contato) {
 
       await SubmitRequest.submit(user,order) //chama a função e envia os dados para a table request
             //seta o escolha
-        return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```']
+        return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```',]
 
     }
     if (msg.toUpperCase() == 'C') {
