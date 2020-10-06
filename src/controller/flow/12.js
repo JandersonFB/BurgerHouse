@@ -22,7 +22,7 @@ async function execute(user, msg, contato) {
     } */
 
     if (msg.toUpperCase() == 'OK') {
-        banco.db[user].stage = ''
+        banco.db[user].stage = 0
         setStage.envStageDb(user, 0)
         NovoClienteAtendimento.NovoClienteAtendimento({soma: -1})
         await enviaParaFrontend.enviaParaFrontend({
