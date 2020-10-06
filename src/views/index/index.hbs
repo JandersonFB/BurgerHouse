@@ -12,6 +12,7 @@
             <div class="page-title">
                 <ol class="breadcrumb text-right">
                     <p>Desligar / Ligar &nbsp;&nbsp;</p>
+
                     {{#if (valorTrue boot)}}
                     <label class="switch">
                         <input type="checkbox" id="checkbox" data-toggle="modal"checked >
@@ -22,6 +23,7 @@
                         <input type="checkbox" id="checkbox" data-toggle="modal" >
                         <span class="slider round"></span>
                     </label>
+
                     {{/if}}
                 </ol>
             </div>
@@ -126,7 +128,7 @@
 
     <div class="col-xl-9">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" id="divDoPedido">
 
                 {{!-- fazer o carregamento de cada pedido começando por aqui --}}
                 {{#if requests}}
