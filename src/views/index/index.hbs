@@ -12,25 +12,18 @@
             <div class="page-title">
                 <ol class="breadcrumb text-right">
                     <p>Desligar / Ligar &nbsp;&nbsp;</p>
-                    
+
                     {{#if (valorTrue boot)}}
                     <label class="switch">
                         <input type="checkbox" id="checkbox" data-toggle="modal"checked >
                         <span class="slider round"></span>
                     </label>
-                     <button type="button"
-                            title="Abrir QrCode" class="btn btn-danger float-right"><i
-                                class="fa-2x fa-qrcode "></i></button>
                     {{else}}
                       <label class="switch">
                         <input type="checkbox" id="checkbox" data-toggle="modal" >
                         <span class="slider round"></span>
                     </label>
-                     <button type="button"
-                     data-toggle="modal"
-                     data-target=".modal"
-                            title="Abrir QrCode" class="btn btn-info rounded float-right ml-2"><i
-                                class="fa fa-qrcode "></i></button>
+
                     {{/if}}
                 </ol>
             </div>

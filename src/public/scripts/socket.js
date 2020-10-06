@@ -1,16 +1,17 @@
 var socket = io()
 
-socket.on('PedidoConcluido', async function (data) {
+socket.on('PedidoConcluido', async function(data) {
     playSound()
-  await renderPedido(data)
+    await renderPedido(data)
     somaPedidosDia()
+
 })
 
-socket.on('NovoClienteAtendimento',async function (data){
+socket.on('NovoClienteAtendimento', async function(data) {
     somaAtendimento(data.soma)
 })
 
-function somaAtendimento(data){
+function somaAtendimento(data) {
     let elemeto = document.getElementById('EmAtendimento')
     const text = elemeto.textContent
     let SomaNumber = Number(text) + data
@@ -79,7 +80,7 @@ async function renderPedido(dados) {
 
 <div class="form-group col-12">
 <div class="form-group col-4">
-    <h6 class=""><strong>Pedido: </strong> #</h6>
+    <h6 class=""><strong>Pedido: </strong> # ${dados.order}</h6>
 </div>
 
 <div class="form-group col-8">
@@ -88,12 +89,14 @@ async function renderPedido(dados) {
 </div>
 
 <div class="form-group ml-3">
-    <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong> ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}  ${dados.trocoPara ? ` Troco Para: ${(dados.trocoPara.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }))}` : ''}</i></h6>
-    <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa fa-money"> </i> R$ 50,00
-    </h6>
-    <h6 class="mt-1"><strong>Foma de Pagamento: </strong><i class="fa  fa-credit-card">
-            Cartao</i></h6>
-    <h6 class="mt-1"><strong>Endereço: </strong> ${dados.Address ? dados.Address : ''}</h6>
+    <h6 class="mt-1"><strong>Total: <i class="fa fa-money"></i></strong> ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })} ${dados.taxa? `<i>--Taxa de Entrega ${dados.taxa}</i>` : ''} ${dados.trocoPara ? ` Troco Para: ${(dados.trocoPara.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }))}` : ''}</i></h6>
+    ${dados.formaPagamento?`
+    <h6 class="mt-1"><strong>Foma de Pagamento: </strong> ${dados.formaPagamento}
+    </h6>`:''
+    }
+    ${dados.dadosEntrega?`<h6 class="mt-1"><strong>Tipo de Entrega: </strong>${dados.dadosEntrega}</h6>`  : ''}
+
+    ${dados.Address?`<h6 class="mt-1"><strong>Endereço: </strong> ${dados.Address}</h6>`: ''}
     <h6 class="mt-1"><strong>Hora do Pedido: <i class="fa  fa-tachometer"></i></strong>
         ${dados.OrderTime.split(':')[0]}:${dados.OrderTime.split(':')[1]}Hr</i></h6>
 </div>
