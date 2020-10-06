@@ -13,7 +13,7 @@ const { client, stopClient, sendText } = require('@config/bot')
 
 
 router.get('/', auth, async(req, res) => {
-    let sql = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address,requests.orderRequest, menus.name, menus.class, menus.desc, menus.value, requests.id, requests.quantity, requests.note, requests.delivery, requests.formPayment,requests.deliveryType, requests.profit, requests.spent, requests.status, requests.createdAt, requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where status = 'Pendente' OR status = 'Preparando' OR status= 'Saiu para Entrega';`
+    let sql = `SELECT users.name as nome, users.telephone, users.neighborhood, users.address,requests.orderRequest, menus.name, menus.class, menus.desc, menus.value, requests.id,requests.trocoPara, requests.quantity, requests.note, requests.delivery, requests.formPayment,requests.deliveryType, requests.profit, requests.spent, requests.status, requests.createdAt, requests.updatedAt FROM relacionamentos join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) where status = 'Pendente' OR status = 'Preparando' OR status= 'Saiu para Entrega';`
     let countRequest = `SELECT COUNT(distinct  UserId) as createdAt FROM relacionamentos  WHERE DATE(createdAt) = DATE(NOW());`
     let countPreparo = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Preparando';`
     let profitSpent = `SELECT sum(requests.profit) as profit, sum(requests.spent) as spent FROM relacionamentos  join users on(relacionamentos.UserId = users.id) join menus on( relacionamentos.MenuId = menus.id) join requests on (relacionamentos.PedidosId = requests.id) WHERE DATE(requests.createdAt) = DATE(NOW()) and status !='Cancelado';`
@@ -27,7 +27,7 @@ router.get('/', auth, async(req, res) => {
         for (var i = 0; i < result.length; i++) {
 
             var telehpneIgual = false;
-
+            console.log(result)
             for (var j = 0; j < i; j++) {
                 if (saida[j] && result[i].orderRequest == saida[j].orderRequest) {
                     saida[j].pedidos.push({
@@ -49,7 +49,9 @@ router.get('/', auth, async(req, res) => {
             if (!telehpneIgual) {
                 saida.push({
                     orderRequest: result[i].orderRequest,
+                    delivery:result[i].delivery,
                     telephone: result[i].telephone,
+                    trocoPara:result[i].trocoPara,
                     nome: result[i].nome,
                     neighborhood: result[i].neighborhood,
                     address: result[i].address,
@@ -150,7 +152,7 @@ router.post('/desligabot', async(req, res) => {
 
 
 router.get('/marketing', (req, res) => {
-    req.flash('error_msg', 'O plano Básico não cobre Marketing Incluso, se deseja ter uma ferramenta de marketing inclusa acesse: http://DevelopingSolutions/planos')
+    req.flash('error_msg', 'O plano Básico não cobre Marketing Incluso, se deseja ter uma ferramenta de marketing inclusa acesse: https://solutionstech.com.br/planos')
     res.redirect('/')
 })
 

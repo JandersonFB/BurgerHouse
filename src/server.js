@@ -69,7 +69,13 @@ app.engine('hbs', hbs({
         },
         dinheiro: function(value) {
             if (value) {
-                return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+                return Number(value).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+            }
+            return
+        },
+        somaDinheiro: function(value1,value2) {
+            if (value1) {
+                return (value1 + value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             }
             return
         },
