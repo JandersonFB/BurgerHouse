@@ -10,7 +10,7 @@ const User = require('@models/Users');
 //const public = require('@public/images')
 let venom_client;
 var status
-
+let key =0
 const sendText = async(telephone, msg) => {
     if (!venom_client) {
         return
@@ -23,6 +23,7 @@ const sendText = async(telephone, msg) => {
 const stopClient = async() => {
     if (venom_client) {
         //  await venom_client.close()
+        key=0
         return await venom_client.close().then(() => console.log('Cliente Desativado'))
     }
     return console.log('client ainda não criado!');
@@ -39,7 +40,9 @@ const getStatus = async() => {
 
 
 async function client() {
-    // if (venom_client) return venom_client;
+     //if (venom_client) return venom_client;
+    if(key == 1){return}
+    key =1
     venom_client = await create('Delivery', (base64Qr, asciiQR) => {
             // Mostra o Qr Code no Terminal
             console.log(asciiQR);

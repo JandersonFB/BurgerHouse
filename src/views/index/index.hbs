@@ -12,10 +12,17 @@
             <div class="page-title">
                 <ol class="breadcrumb text-right">
                     <p>Desligar / Ligar &nbsp;&nbsp;</p>
+                    {{#if (valorTrue boot)}}
                     <label class="switch">
-                        <input type="checkbox" id="checkbox" data-toggle="modal" checked>
+                        <input type="checkbox" id="checkbox" data-toggle="modal"checked >
                         <span class="slider round"></span>
                     </label>
+                    {{else}}
+                      <label class="switch">
+                        <input type="checkbox" id="checkbox" data-toggle="modal" >
+                        <span class="slider round"></span>
+                    </label>
+                    {{/if}}
                 </ol>
             </div>
         </div>

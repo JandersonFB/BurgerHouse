@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
  let key=0
     const checkbox = document.querySelector('input[type="checkbox"]');
     
-      checkbox.addEventListener('change', function () {
+      checkbox.addEventListener('change', async function () {
         if (checkbox.checked) {
           jQuery('.modal').modal();
           if(key==0){

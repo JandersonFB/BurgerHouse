@@ -13,6 +13,9 @@ const Config = db.define('configuration', {
     },
     maxCompra: {
         type: db.Sequelize.STRING
+    },
+    boot:{
+        type: db.Sequelize.STRING
     }
 })
 
