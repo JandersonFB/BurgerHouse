@@ -19,10 +19,17 @@ function somaAtendimento(data) {
 }
 //Enviar o User e o Status do pedido quando mudar para o backend
 
-let elemento = document.getElementById('pedidos');
+let elemento = document.getElementById('divDoPedido');
 
 
 async function renderPedido(dados) {
+    let data = new Date()
+    const mes = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+        "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ]
+
+
     let produtos;
     let total = 0;
     // let spent=0;
@@ -48,9 +55,13 @@ async function renderPedido(dados) {
     await getProdutos().then(res => produtos = res.toString())
 
 
-    const html = ` <div class="col-sm-4">
-<h4 class="card-title mb-0">Pedidos</h4>
-<div class="small text-muted">October 2017</div>
+    const html = `
+    <div id="pedidos" class="row" style="min-height: 500px;">
+
+    <div class="col-sm-4">
+    <h4 class="card-title mb-0">Pedidos</h4>
+
+<div class="small text-muted">${mes[data.getMonth()]} ${data.getFullYear()}</div>
 
 </div>
 <!--/.col-->
@@ -58,7 +69,7 @@ async function renderPedido(dados) {
 <div class="col-sm-8 hidden-sm-down">
 
 <button type="button" class="btn btn-primary float-right bg-flat-color-1 ml-3"><i
-        class="fa fa-print"></i></button>
+        class="fa fa-print" onclick="imprimir(this)"></i></button>
         <button type="button" onclick="mandaMensagem('${dados.telephone}','Cancelado','${dados.order}')"
         title="Cancelar Pedido" class="btn btn-danger float-right"><i
             class="fa fa-window-close"></i></button>
@@ -116,7 +127,9 @@ async function renderPedido(dados) {
     ${produtos}
 </table>
 <hr class="mt-5">
-</div>`
+</div>
+</div>
+`
 
     elemento.insertAdjacentHTML('afterbegin', html);
 }

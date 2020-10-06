@@ -11,7 +11,7 @@ router.get('/', async(req, res) => {
     let SQL = `SELECT * FROM configurations;`
     await db.connection.query(SQL, (err, result) => {
         console.log(result[0].neighborhood)
-        res.render('config/config', { neighborhood: result[0].neighborhood, classMenu: result[0].classMenu, description: result[0].description,maxCompra:result[0].maxCompra })
+        res.render('config/config', { neighborhood: result[0].neighborhood, classMenu: result[0].classMenu, description: result[0].description, maxCompra: result[0].maxCompra })
     })
 })
 
@@ -63,24 +63,24 @@ router.get('/delivery', (req, res) => {
 
 router.post('/delivery', (req, res) => {
     //res.send(req.body.tempoEspera)
-    try {  
+    try {
         Delivery.create({
-        neighborhoods: req.body.bairro,
-        cost: req.body.valor.replace(',','.'),
-    }).then(() => {
-        req.flash('success_msg', 'Configurações sobre Entregas Salva com Sucesso')
-        res.redirect('/config/delivery')
-    
-    }).catch((err) => {
-        req.flash('error_msg', 'Erro ao cadastrar Entregas')
-        res.redirect('/config/delivery')
-    })
-        
+            neighborhoods: req.body.bairro,
+            cost: req.body.valor.replace(',', '.'),
+        }).then(() => {
+            req.flash('success_msg', 'Configurações sobre Entregas Salva com Sucesso')
+            res.redirect('/config/delivery')
+
+        }).catch((err) => {
+            req.flash('error_msg', 'Erro ao cadastrar Entregas')
+            res.redirect('/config/delivery')
+        })
+
     } catch (error) {
         req.flash('error_msg', 'Erro ao cadastrar Entregas')
         res.redirect('/config/delivery')
     }
-  
+
 })
 
 router.post('/maxPedidos', (req, res) => {
@@ -99,7 +99,7 @@ router.post('/maxPedidos', (req, res) => {
             })
         } else {
             Config.findOne({ id: '1' }).then((config) => {
-               config.update({maxCompra: req.body.maxCompra})
+                config.update({ maxCompra: req.body.maxCompra })
                 config.save().then(() => {
                     req.flash('success_msg', 'Numero Máximo de Pedido Editado com Sucesso!')
                     res.redirect('/config')
@@ -112,5 +112,8 @@ router.post('/maxPedidos', (req, res) => {
     })
 
 })
+
+
+
 
 module.exports = router

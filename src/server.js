@@ -25,6 +25,7 @@ const grapichs = require('@/routes/grapichs')
 const cashier = require('@/routes/cashier')
 const profile = require('@routes/profile.js')
 const login = require('@routes/login')
+const delivery = require('@routes/delivery')
     //Inicia O client
     //client()
     //Para o Client
@@ -73,7 +74,7 @@ app.engine('hbs', hbs({
             }
             return
         },
-        somaDinheiro: function(value1,value2) {
+        somaDinheiro: function(value1, value2) {
             if (value1) {
                 return (value1 + value2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             }
@@ -154,6 +155,7 @@ app.use('/dados', grapichs)
 app.use('/caixa', cashier)
 app.use('/profile', profile)
 app.use(login)
+app.use('/delivery', delivery)
 
 const port = process.env.PORT || 3001
 server.listen(port, () => {
