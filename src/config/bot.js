@@ -81,6 +81,7 @@ async function start(client) {
     });
 
     client.onMessage(async(message) => {
+        if(!message.isGroupMsg){
         const user = await User.findAll({ where: { telephone: message.sender.id } })
         console.log(user.length)
         if (user.length === 0) {
@@ -118,7 +119,7 @@ async function start(client) {
             console.log('cadastrado')
 
         }
-
+    }
 
     });
 }
