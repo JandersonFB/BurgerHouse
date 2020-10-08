@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 module.exports = {
     dialect: 'mysql',
     host: 'bootwhatsapp.cwdkivtj8ka1.sa-east-1.rds.amazonaws.com',
