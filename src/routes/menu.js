@@ -14,7 +14,7 @@ router.get('/menu/register', auth, (req, res) => {
 
 router.post('/menu/register', auth, (req, res) => {
     Menu.create({
-        name: req.body.name,
+        name: req.body.name.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); }),
         desc: req.body.desc,
         value: req.body.value.replace(',', '.'),
         costProduce: req.body.costProduce.replace(',', '.'),
