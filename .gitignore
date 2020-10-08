@@ -3,5 +3,5 @@ test
 tokens
 .vscode
 debug.log
-*qrCode.png
+*qrCode.png 
 src/public/images/qrCode.png
