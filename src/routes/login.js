@@ -12,10 +12,10 @@ let resetConfirm = []
 let error = []
 
 router.get('/login', (req, res) => {
-    res.render('login/login', auth, { layout: 'login.hbs' })
+    res.render('login/login', { layout: 'login.hbs' })
 })
 
-router.post('/login', auth, (req, res, next) => {
+router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/login',
