@@ -19,7 +19,7 @@ router.get('/', auth, async (req, res) => {
     let countEntregue = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Entregue';`
     let countCancelado = `SELECT COUNT(distinct  IdUsuario) as createdAt FROM requests  WHERE DATE(createdAt) = DATE(NOW()) and status='Cancelado';`
     let emAtendimento = `select count(stage) as stage from users where stage !='14' and stage !='0';`
-    let admin = `select name, email from admins;`
+    let admin = `select name, email from admins where id='1';`
     let boot = `select boot from configurations`
     db.connection.query(sql, (err, result) => {
         var saida = [];
