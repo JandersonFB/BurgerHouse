@@ -4,10 +4,10 @@ const router = express.Router()
 const Config = require('@models/Config')
 const classMenu = require('@models/classMenu')
 const db = require('@database/configSQL')
-
+const { auth } = require('@helpers/auth')
 const Delivery = require('@models/RoteDelivery')
 
-router.get('/', async(req, res) => {
+router.get('/', auth, async(req, res) => {
     let SQL = `SELECT * FROM configurations;`
     await db.connection.query(SQL, (err, result) => {
         console.log(result[0].neighborhood)
@@ -15,7 +15,7 @@ router.get('/', async(req, res) => {
     })
 })
 
-router.post('/setConfig', async(req, res) => {
+router.post('/setConfig', auth, async(req, res) => {
     let SQL;
     if (req.body.neighborhood) {
         SQL = `UPDATE configurations SET neighborhood = '${req.body.neighborhood}';`
@@ -40,7 +40,7 @@ router.post('/setConfig', async(req, res) => {
 
 })
 
-router.post('/', (req, res) => {
+router.post('/', auth, (req, res) => {
     console.log(req.body.class)
     let classe = req.body.class.toUpperCase()
     console.log(classe)
@@ -57,11 +57,11 @@ router.post('/', (req, res) => {
 
 })
 
-router.get('/delivery', (req, res) => {
+router.get('/delivery', auth, (req, res) => {
     res.render('config/entrega')
 })
 
-router.post('/delivery', (req, res) => {
+router.post('/delivery', auth, (req, res) => {
     //res.send(req.body.tempoEspera)
     try {
         Delivery.create({
@@ -83,7 +83,7 @@ router.post('/delivery', (req, res) => {
 
 })
 
-router.post('/maxPedidos', (req, res) => {
+router.post('/maxPedidos', auth, (req, res) => {
     let sql = `SELECT maxCompra FROM configurations;`
     db.connection.query(sql, (err, result) => {
         console.log(result)

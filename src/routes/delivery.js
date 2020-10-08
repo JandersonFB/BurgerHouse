@@ -2,8 +2,9 @@ require('module-alias/register')
 const express = require('express')
 const router = express.Router()
 const db = require('../database/configSQL')
+const { auth } = require('@helpers/auth')
 
-router.get('/', (req, res) => {
+router.get('/', auth, (req, res) => {
     let SQL = `SELECT * from deliveries;`
     db.connection.query(SQL, (err, result) => {
         if (err) {
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
 
 })
 
-router.post('/editar', (req, res) => {
+router.post('/editar', auth, (req, res) => {
     let SQL = `SELECT * from deliveries where id = ${req.body.id};`
     db.connection.query(SQL, (err, result) => {
         if (err) {
@@ -27,7 +28,7 @@ router.post('/editar', (req, res) => {
 })
 
 
-router.post('/editando', (req, res) => {
+router.post('/editando', auth, (req, res) => {
     console.log(req.body.neighborhoods, req.body.cost, req.body.id)
     let SQL = `update deliveries set neighborhoods='${req.body.neighborhoods}' ,cost='${req.body.cost}'  where id = '${req.body.id}';`
     db.connection.query(SQL, (err, result) => {
@@ -42,7 +43,7 @@ router.post('/editando', (req, res) => {
     })
 })
 
-router.post('/apagar', (req, res) => {
+router.post('/apagar', auth, (req, res) => {
     let SQL = `delete from deliveries where id = ${req.body.id};`
     db.connection.query(SQL, (err, result) => {
         if (err) {
