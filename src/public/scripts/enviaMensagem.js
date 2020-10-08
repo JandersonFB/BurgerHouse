@@ -15,6 +15,9 @@ async function mandaMensagem(numero, mensagem,order) {
                 let countPreparo = document.getElementById('countPreparoI')
                 countPreparo.innerText = Number(countPreparo.textContent) +1
                 }
+                if(mensagem=='Entregue'){
+                        location.reload()
+                }
                
         }
         if (resposta == true) {
