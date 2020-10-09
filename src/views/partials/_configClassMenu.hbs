@@ -39,7 +39,7 @@
                 <form action="/config/editarClass" method="post">
                     <div class="row">
                         <div class="form-group col-8">
-                            <select name="class" id="class" class="form-control mt-4">
+                            <select name="class" required id="class" class="form-control mt-4">
                                 <option value="">Selecione</option>
                                 {{#each menus}}
                                 <option value="{{class}}">{{class}}</option>
