@@ -7,11 +7,13 @@ const db = require('@database/configSQL')
 const { auth } = require('@helpers/auth')
 const Delivery = require('@models/RoteDelivery')
 
-router.get('/', auth, async(req, res) => {
+router.get('/', async(req, res) => {
     let SQL = `SELECT * FROM configurations;`
+    let SQL_class = `SELECT distinct(class) FROM menus;`
     await db.connection.query(SQL, (err, result) => {
-        console.log(result[0].neighborhood)
-        res.render('config/config', { neighborhood: result[0].neighborhood, classMenu: result[0].classMenu, description: result[0].description, maxCompra: result[0].maxCompra })
+        db.connection.query(SQL_class, (err, menus) => {
+            res.render('config/config', { menus: menus, neighborhood: result[0].neighborhood, classMenu: result[0].classMenu, description: result[0].description, maxCompra: result[0].maxCompra })
+        })
     })
 })
 
@@ -111,6 +113,29 @@ router.post('/maxPedidos', auth, (req, res) => {
         }
     })
 
+})
+
+
+
+router.post('/editarClass', (req, res) => {
+    let SQL_class = `SELECT distinct(class) FROM menus where class='${req.body.class}';`
+    db.connection.query(SQL_class, (err, menus) => {
+        res.render('config/class', { class: result, nameClass: menus })
+    })
+})
+
+router.post('/class', (req, res) => {
+    const classe = req.body.class.toUpperCase()
+    let SQL = `UPDATE menus SET class = '${classe}' WHERE class='${req.body.parametro}';`
+    db.connection.query(SQL, (err, result) => {
+        if (err) {
+            req.flash('error_msg', 'Houve um Erro ao Editar a Classe')
+            res.redirect('/config')
+        } else {
+            req.flash('success_msg', 'Classe Editada com Sucesso!')
+            res.redirect('/config')
+        }
+    })
 })
 
 
