@@ -6,12 +6,12 @@ const setStage = require('../../helpers/setStage')
 
 
 async function execute(user, msg) {
+    let valorTotal =0
+    valorTotal = 0
     let quantidadeBairros = await escolha.db[user].escolha[0].qtdBairros
 
-    let valorTotal =0
         //seta o escolha
         //Coloar o valor da taxa 
-
     await escolha.db[user].itens.forEach(e => {
         valorTotal += e.itens.price * e.quantity
     })
