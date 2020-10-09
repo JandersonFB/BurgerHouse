@@ -100,6 +100,14 @@ app.engine('hbs', hbs({
             let data = new Date(value)
             return `${formataHora(data.getHours())}:${formataHora(data.getMinutes())}`
         },
+        trataData: function(value){
+            const formataHora = (Hora) => Hora < 10 ? '0' + Hora : Hora
+            let data = new Date(value)
+            dia= data.getDate()
+            mes = data.getMonth()
+            ano = data.getFullYear()
+            return `${formataHora(dia)}/${formataHora(mes+1)}/${ano}`
+        },
         valorTrue: function(value) {
             return value == 'true'
         },
