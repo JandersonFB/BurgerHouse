@@ -16,6 +16,12 @@ const Config = db.define('configuration', {
     },
     boot:{
         type: db.Sequelize.STRING
+    },
+    inicio:{
+        type: db.Sequelize.DATEONLY,
+    },
+    vencimento:{
+        type: db.Sequelize.DATEONLY,
     }
 })
 
