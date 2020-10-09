@@ -40,7 +40,7 @@ async function execute(user, msg, contato) {
 
       await SubmitRequest.submit(user,order) //chama a função e envia os dados para a table request
             //seta o escolha
-        return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.\n\n```Desenvolvido por Matheus & IsaacDSC```',]
+        return ['✅  Seu pedido foi *realizado*.\n\nObrigado por realizar seu pedido.',]
 
     }
     if (msg.toUpperCase() == 'C') {
