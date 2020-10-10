@@ -26,6 +26,7 @@ const cashier = require('@/routes/cashier')
 const profile = require('@routes/profile.js')
 const login = require('@routes/login')
 const delivery = require('@routes/delivery')
+const payment = require('@/routes/payment')
     //Inicia O client
     //client()
     //Para o Client
@@ -100,6 +101,14 @@ app.engine('hbs', hbs({
             let data = new Date(value)
             return `${formataHora(data.getHours())}:${formataHora(data.getMinutes())}`
         },
+        trataData: function(value){
+            const formataHora = (Hora) => Hora < 10 ? '0' + Hora : Hora
+            let data = new Date(value)
+            dia= data.getDate()
+            mes = data.getMonth()
+            ano = data.getFullYear()
+            return `${formataHora(dia)}/${formataHora(mes+1)}/${ano}`
+        },
         valorTrue: function(value) {
             return value == 'true'
         },
@@ -153,6 +162,7 @@ app.use(reset)
 app.use('/suporteTecnico', suporteTecnico)
 app.use('/dados', grapichs)
 app.use('/caixa', cashier)
+app.use('/pay', payment)
 app.use('/profile', profile)
 app.use(login)
 app.use('/delivery', delivery)
