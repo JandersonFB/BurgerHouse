@@ -56,7 +56,21 @@ router.post('/',async(req,res)=>{
 })
 
 router.get('/success',(req,res)=>{
-    res.send('sucesso')
+    const paymentId = req.query.collection_id	
+    mercadopago.payment.capture(paymentId, mercadopago, (error, response) => {
+        if (error){
+            console.log(error);
+            res.send('err')
+        }else{
+           if(response.response.status === 'approved'){
+            const SQL = `update configurations set vencimento = ADDDATE(vencimento, INTERVAL 30 DAY), inicio = ADDDATE(inicio, INTERVAL 30 DAY) ;`
+
+            res.send('sucesso')
+           }
+          
+        }
+    })
+ 
 })
 
 
