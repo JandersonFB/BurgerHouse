@@ -24,10 +24,7 @@ const Config = db.define('configuration', {
         type: db.Sequelize.DATEONLY,
     },
     plano: {
-        type: db.Sequelize.STRING
-    },
-    linkPagamento: {
-        type: db.Sequelize.STRING
+        type: db.Sequelize.FLOAT
     }
 })
 

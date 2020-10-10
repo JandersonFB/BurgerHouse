@@ -15,7 +15,10 @@ router.get('/lucros', auth, (req, res) => {
     ( SELECT sum(requests.profit) FROM requests where status='Entregue') AS totalLucro,
     ( SELECT sum(requests.spent) FROM requests where status='Entregue' ) AS totalDespesa,
     ( SELECT vencimento from configurations ) AS vencimento,
-    ( SELECT count(requests.id)*0.35 FROM requests where status='Entregue' ) AS pagamento`
+    ( SELECT ROUND(count(distinct requests.orderRequest)*configurations.plano,2) as preco
+FROM requests , configurations
+WHERE requests.createdAt >= date(configurations.inicio)  and status = 'Entregue' 
+ ) AS pagamento`
 
     db.connection.query(sql_admin, (err, admin) => {
         if (err) {

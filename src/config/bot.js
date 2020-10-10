@@ -11,6 +11,7 @@ const User = require('@models/Users');
 let venom_client;
 var status
 let key =0
+
 const sendText = async(telephone, msg) => {
     if (!venom_client) {
         return
