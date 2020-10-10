@@ -4,7 +4,7 @@ const mercadopago = require("mercadopago");
 
 mercadopago.configure({
     sandbox: true,
-    access_token: 'TEST-3591764342118149-100414-df1d8b9708cf9e7de2716e222f4bd45c-399436680',
+    access_token: '',
     
 });
 
