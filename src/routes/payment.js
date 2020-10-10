@@ -1,56 +1,62 @@
-require('module-alias/register')
 const express = require('express')
 const router = express.Router()
-const paypal = require('paypal-rest-sdk')
+const mercadopago = require("mercadopago");
 
-paypal.configure({
-    'mode': 'sandbox', //sandbox or live
-    'client_id': 'AUeEAIhbz0YfbzTThFEUHQYsrOpHCDJzb3f_xsK4RvGiFMKTqO8Lolarn4e29KJZ0J-9caVz4iZmvxOm',
-    'client_secret': 'EItV6MAnHMWOdva9gdfytTHig5BeaznBzm8eJY4eZHMpxhqgloQrWyWpU3T9sQKRWDuau5QcE56YyxSi'
-  });
+mercadopago.configure({
+    sandbox: true,
+    access_token: 'TEST-3591764342118149-100414-df1d8b9708cf9e7de2716e222f4bd45c-399436680',
+    
+});
 
+const getFullUrl = (req) =>{
+    const url = req.protocol + '://' + req.get('host');
+    return url;
+}
 
-router.post('/',(req,res)=>{
+router.post('/',async(req,res)=>{
 
-    let create_payment_json = {
-        "intent": "sale",
-        "payer": {
-            "payment_method": "paypal"
+    const purchaseOrder = {
+        items: [
+          item = {
+            id: '1',
+            title: "Prestação De Serviço solutionstech",
+            description : "Pagamento Prestação De Serviço solutionstech",
+            quantity: 1,
+            currency_id: 'BRL',
+            unit_price: parseFloat('98.30')
+          }
+        ],
+        auto_return : "all",
+        payment_methods: {
+            excluded_payment_types: [
+                {
+                    "id": "ticket"
+                }
+            ],
+            installments: 3
         },
-        "redirect_urls": {
-            "return_url": "/success",
-            "cancel_url": "/cancel"
+        binary_mode: true,
+
+        back_urls : {
+          success : getFullUrl(req) + "/pay/success",
+          pending : getFullUrl(req) +  "/pay/pending",
+          failure : getFullUrl(req) +"/pay/failure",
         },
-        "transactions": [{
-            "item_list": {
-                "items": [{
-                    "name": "Prestação De Serviço solutionstech",
-                    "sku": "001",
-                    "price": "98.30",
-                    "currency": "BRL",
-                    "quantity": 1
-                }]
-            },
-            "amount": {
-                "currency": "BRL",
-                "total": "98.30"
-            },
-            "description": "Pagamento Prestação De Serviço solutionstech"
-        }]
-    };
 
-    paypal.payment.create(create_payment_json, function (error, payment) {
-        if (error) {
-            throw error;
-        } else {
-            payment.links.forEach(e=>{
-                if(e.rel==='approval_url')
-                res.redirect(e.href)
+        statement_descriptor: "solutionstech"
 
-            })
-        }
-    });
+      }
+      try {
+        const preference = await mercadopago.preferences.create(purchaseOrder);
+        return res.redirect(`${preference.body.init_point}`);
+      }catch(err){
+        return res.send(err.message);
+      }
    
+})
+
+router.get('/success',(req,res)=>{
+    res.send('sucesso')
 })
 
 

@@ -26,7 +26,7 @@ const cashier = require('@/routes/cashier')
 const profile = require('@routes/profile.js')
 const login = require('@routes/login')
 const delivery = require('@routes/delivery')
-const payment = require('@routes/payment')
+const payment = require('@/routes/payment')
     //Inicia O client
     //client()
     //Para o Client
