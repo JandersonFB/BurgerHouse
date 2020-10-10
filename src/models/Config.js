@@ -14,14 +14,20 @@ const Config = db.define('configuration', {
     maxCompra: {
         type: db.Sequelize.STRING
     },
-    boot:{
+    boot: {
         type: db.Sequelize.STRING
     },
-    inicio:{
+    inicio: {
         type: db.Sequelize.DATEONLY,
     },
-    vencimento:{
+    vencimento: {
         type: db.Sequelize.DATEONLY,
+    },
+    plano: {
+        type: db.Sequelize.STRING
+    },
+    linkPagamento: {
+        type: db.Sequelize.STRING
     }
 })
 
