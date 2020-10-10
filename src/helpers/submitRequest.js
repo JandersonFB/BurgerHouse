@@ -6,7 +6,7 @@ const escolha = require("@data/escolha");
 async function submit(user, order) {
 
     let sql = `SELECT id FROM users where telephone = '${user}';`
-    let sql_adress = `UPDATE users SET address = '${escolha.db[user].endereco}' WHERE telephone = '${user}';`
+    let sql_adress = `UPDATE users SET address = '${escolha.db[user].endereco}',neighborhood = '${escolha.db[user].bairro}' WHERE telephone = '${user}';`
         //let sql_relacionamentos = `ISERT INTO relacionamentos (UserId,MenuId,PedidosId,createdAt, updateAt) VALUES ('${UserId[0].id}','${escolha.db[user].itens.id}','',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),`
     await db.connection.query(sql_adress, (err, resultado) => {
         if (err) {

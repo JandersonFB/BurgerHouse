@@ -30,6 +30,7 @@ async function execute(user, msg, contato) {
             telephone: user,
             taxa: escolha.db[user].valorTaxa,
             OrderTime: new Date().toTimeString(),
+            bairro:escolha.db[user].bairro,
             Address: escolha.db[user].endereco,
             formaPagamento: escolha.db[user].formaPagamento,
             request: escolha.db[user].itens,

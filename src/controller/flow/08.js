@@ -21,7 +21,7 @@ async function execute(user, msg) {
     } else {
 
         const valorTaxa = await escolha.db[user].escolha.filter(e => { return e.idBairro == msg })
-        
+        escolha.db[user].bairro = valorTaxa[0].bairro
         escolha.db[user].valorTaxa = valorTaxa[0].custo
         setStage.envStageDb(user, 9)
         banco.db[user].stage = 9

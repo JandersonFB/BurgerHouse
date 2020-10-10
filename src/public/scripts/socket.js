@@ -107,7 +107,7 @@ async function renderPedido(dados) {
     }
     ${dados.dadosEntrega?`<h6 class="mt-1"><strong>Tipo de Entrega: </strong>${dados.dadosEntrega}</h6>`  : ''}
 
-    ${dados.Address?`<h6 class="mt-1"><strong>Endereço: </strong> ${dados.Address}</h6>`: ''}
+    ${dados.Address?`<h6 class="mt-1"><strong>Endereço: </strong> ${dados.Address}  ${dados.bairro}</h6>`: ''}
     <h6 class="mt-1"><strong>Hora do Pedido: <i class="fa  fa-tachometer"></i></strong>
         ${dados.OrderTime.split(':')[0]}:${dados.OrderTime.split(':')[1]}Hr</i></h6>
 </div>
