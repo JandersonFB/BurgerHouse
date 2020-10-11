@@ -6,7 +6,6 @@ const db = require('@database/configSQL')
 mercadopago.configure({
     sandbox: false,
     access_token: 'APP_USR-7805781539029586-101101-09c3c56a9b669a013e7239c7b24254a7-657211312',
-    
 });
 
 const getFullUrl = (req) =>{
