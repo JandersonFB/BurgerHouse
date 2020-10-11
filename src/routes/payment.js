@@ -4,8 +4,8 @@ const mercadopago = require("mercadopago");
 const db = require('@database/configSQL')
 
 mercadopago.configure({
-    sandbox: true,
-    access_token: 'TEST-3591764342118149-100414-df1d8b9708cf9e7de2716e222f4bd45c-399436680',
+    sandbox: false,
+    access_token: 'APP_USR-7805781539029586-101101-09c3c56a9b669a013e7239c7b24254a7-657211312',
     
 });
 
