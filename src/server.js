@@ -1,5 +1,7 @@
 //File System para salvar o Qr Code
 require('module-alias/register')
+require('dotenv').config()
+
 const express = require('express')
 const app = express()
 const hbs = require('express-handlebars')
@@ -167,7 +169,7 @@ app.use('/profile', profile)
 app.use(login)
 app.use('/delivery', delivery)
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT_APLICATION
 server.listen(port, () => {
     console.log(`http://127.0.0.1:${port}`)
     console.log('Break Server CTRL + C')

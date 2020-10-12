@@ -1,9 +1,9 @@
 require('dotenv').config()
 module.exports = {
     dialect: 'mysql',
-    host: 'bootwhatsapp.cwdkivtj8ka1.sa-east-1.rds.amazonaws.com',
-    username: 'dev',
-    password: 'secret(!#)123TECH',
+    host: process.env.DATABASE_HOST,
+    username: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASS,
     database: process.env.DATABASE_NAME,
 
 }

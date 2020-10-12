@@ -2,10 +2,10 @@ const mysql = require('mysql')
 require('dotenv').config()
 
 const connection = mysql.createConnection({
-    host: 'bootwhatsapp.cwdkivtj8ka1.sa-east-1.rds.amazonaws.com',
+    host: process.env.DATABASE_HOST,
     port: '3306',
-    user: 'dev',
-    password: 'secret(!#)123TECH',
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASS,
     database: process.env.DATABASE_NAME
 })
 
