@@ -5,3 +5,4 @@ tokens
 debug.log
 *qrCode.png 
 src/public/images/qrCode.png
+.env
